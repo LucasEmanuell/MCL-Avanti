@@ -149,3 +149,45 @@ y = np.sin(x)
 
 fig, ax = plt.subplots()
 ax.plot(x, y)
+
+
+# 8. Utilizando pandas, como realizar a leitura de um arquivo CSV em um DataFrame e exibir as primeiras linhas?
+import pandas as pd
+df = pd.read_csv('arquivo.csv')
+print(df.head())
+
+# 9. Utilizando pandas, como selecionar uma coluna específica e filtrar linhas em um “DataFrame” com base em uma condição?
+import pandas as pd
+
+# Exemplo de DataFrame
+data = {
+    'Nome': ['Lucas', 'Bianca', 'Mateus', 'Carla', 'Fernanda'],
+    'Idade': [21, 42, 27, 37, 32],
+    'Cidade': ['Brasília', 'Salvador', 'Recife', 'Porto Alegre', 'Manaus']
+}
+
+df = pd.DataFrame(data)
+
+# Selecionar a coluna 'Idade' e filtrar as linhas onde a idade é maior que 30
+coluna_idade = df['Idade']
+filtro = coluna_idade > 30
+df_filtrado = df[filtro]
+
+print(df_filtrado)
+
+# 10. Utilizando pandas, como lidar com valores ausentes (NaN) em um DataFrame?
+#Pra mostrar
+print(df.isna())
+#Pra remover todas
+df_sem_na = df.dropna()
+#Pra remover coluna, axis = 0 se quiser linha
+df_sem_na_colunas = df.dropna(axis=1)
+#Pra preencher valores ausentes com um valor específico (por exemplo, 0 mas tem varios outros modos de preencher)
+df_preenchido = df.fillna(0)
+#Preenchendo com media
+df['idade'].fillna(df['idade'].mean(), inplace=True)
+# Preenche valores ausentes com o valor anterior (forward fill)
+df.fillna(method='ffill', inplace=True)
+#Ou seguinte (backward fill)
+df.fillna(method='bfill', inplace=True)
+
